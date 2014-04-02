@@ -136,7 +136,7 @@
                 $.each(data.files, function (index, file_data) {
                     // Create the file object
                     file_data.id = self.file_id++;
-                    var file = new Backbone.UploadManager.File({
+                    var file = new Backbone.UploadManager.FileModel({
                         data: file_data,
                         processor: data
                     });
@@ -220,7 +220,7 @@
          * This model represents a file.
          *
          */
-        File: Backbone.Model.extend({
+        FileModel: Backbone.Model.extend({
             state: "pending",
 
             /**
@@ -336,7 +336,7 @@
          *
          */
         FileCollection: Backbone.Collection.extend({
-            model: this.File
+            model: this.FileModel
         }),
 
         /**
