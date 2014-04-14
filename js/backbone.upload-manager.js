@@ -442,12 +442,10 @@
                 // DOM events
                 $('button#btn-cancel', this.el).click(function(){
                     self.model.cancel();
-                    self.collection.remove(self.model);
                 });
                 $('button#btn-clear', this.el).click(function(){
                     self.model.destroy();
-                    self.collection.remove(self.model);
-                })
+                });
             },
 
             /**
