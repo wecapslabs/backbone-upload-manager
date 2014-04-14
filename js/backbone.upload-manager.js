@@ -280,7 +280,7 @@
             done: function (result)
             {
                 // Dispatch event
-                this.state = "error";
+                this.state = "done";
                 this.trigger('filedone', result);
             },
 
