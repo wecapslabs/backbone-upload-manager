@@ -229,7 +229,7 @@
              */
             start: function ()
             {
-                if (this.isPending()) {
+                if (this.isPending() || this.isError()) {
                     this.get('processor').submit();
                     this.state = "running";
 
@@ -397,6 +397,7 @@
              */
             hasFailed: function (error)
             {
+                error = error || "Error";
                 $('span.message', this.el).html('<i class="icon-error"></i> '+error);
             },
 
@@ -417,17 +418,29 @@
             {
                 var when_pending = $('span.size, button#btn-cancel', this.el),
                     when_running = $('div.progress, button#btn-cancel', this.el),
-                    when_done = $('span.message, button#btn-clear', this.el);
+                    when_done = $('span.message, button#btn-clear', this.el),
+                    when_error = $('span.message, button#btn-retry', this.el);
 
                 if (this.model.isPending()) {
-                    when_running.add(when_done).addClass('hidden');
+                    when_running.addClass('hidden');
+                    when_done.addClass('hidden');
+                    when_error.addClass('hidden');
                     when_pending.removeClass('hidden');
                 } else if (this.model.isRunning()) {
-                    when_pending.add(when_done).addClass('hidden');
+                    when_pending.addClass('hidden');
+                    when_done.addClass('hidden');
+                    when_error.addClass('hidden');
                     when_running.removeClass('hidden');
-                } else if (this.model.isDone() || this.model.isError()) {
-                    when_pending.add(when_running).addClass('hidden');
+                } else if (this.model.isDone()) {
+                    when_pending.addClass('hidden');
+                    when_running.addClass('hidden');
+                    when_error.addClass('hidden');
                     when_done.removeClass('hidden');
+                } else if (this.model.isError()) {
+                    when_pending.addClass('hidden');
+                    when_running.addClass('hidden');
+                    when_done.addClass('hidden');
+                    when_error.removeClass('hidden');
                 }
             },
 
@@ -445,6 +458,9 @@
                 });
                 $('button#btn-clear', this.el).click(function(){
                     self.model.destroy();
+                });
+                $('button#btn-retry', this.el).click(function(){
+                    self.model.start();
                 });
             },
 

@@ -10,4 +10,5 @@
 <div class="span3">
     <button class="btn btn-warning btn-small" id="btn-cancel"><i class="icon-remove"></i>Cancel</button>
     <button class="btn btn-small" id="btn-clear">Clear</button>
+    <button class="btn btn-small" id="btn-retry">Retry</button>
 </div>
