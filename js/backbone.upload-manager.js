@@ -17,7 +17,7 @@
                 main: '/templates/upload-manager.main.default',
                 file: '/templates/upload-manager.file.default'
             },
-            uploadUrl: '/upload',
+            url: '/upload',
             autoUpload: false,
             dataType: 'json'
         },
@@ -51,13 +51,7 @@
             this.files = new Backbone.UploadManager.FileCollection();
 
             // Create the file-upload wrapper
-            this.uploadProcess = $('<input id="fileupload" type="file" name="files[]" multiple="multiple">').fileupload({
-                dataType: this.options.dataType,
-                url: this.options.uploadUrl,
-                formData: this.options.formData,
-                autoUpload: this.options.autoUpload,
-                singleFileUploads: true
-            });
+            this.uploadProcess = $('<input id="fileupload" type="file" name="files[]" multiple="multiple">').fileupload(this.options);
 
             // Add upload process events handlers
             this.bindProcessEvents();
