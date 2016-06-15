@@ -376,8 +376,8 @@
             updateProgress: function (progress)
             {
                 var percent = parseInt(progress.loaded / progress.total * 100, 10);
-
-                $('div.progress', this.el)
+                $('progress', this.el).val(percent);
+                $('.progress', this.el)
                     .find('.bar')
                     .css('width', percent+'%')
                     .parent()
@@ -392,7 +392,7 @@
             hasFailed: function (error)
             {
                 error = error || "Error";
-                $('span.message', this.el).html('<i class="icon-error"></i> '+error);
+                $('.error-message .message', this.el).html(error);
             },
 
             /**
@@ -401,7 +401,7 @@
              */
             hasDone: function (result)
             {
-                $('span.message', this.el).html('<i class="icon-success"></i> Uploaded');
+                $('.done-message .message', this.el).html('Uploaded');
             },
 
             /**
@@ -411,9 +411,9 @@
             update: function ()
             {
                 var when_pending = $('span.size, button#btn-cancel', this.el),
-                    when_running = $('div.progress, button#btn-cancel', this.el),
-                    when_done = $('span.message, button#btn-clear', this.el),
-                    when_error = $('span.message, button#btn-retry', this.el);
+                    when_running = $('.progress, button#btn-cancel', this.el),
+                    when_done = $('.done-message, button#btn-clear', this.el),
+                    when_error = $('.error-message, button#btn-retry', this.el);
 
                 if (this.model.isPending()) {
                     when_running.addClass('hidden');

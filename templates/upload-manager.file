@@ -5,7 +5,8 @@
         <div class="progress-label"></div>
         <div class="bar"></div>
     </div>
-    <span class="message hidden"></span>
+    <div class="error-message hidden"><i class="icon-error"></i><span class="message"></span></div>
+    <div class="done-message hidden"><i class="icon-success"></i><span class="message"></span></div>
 </div>
 <div class="span3">
     <button class="btn btn-warning btn-small" id="btn-cancel"><i class="icon-remove"></i>Cancel</button>
